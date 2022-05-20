@@ -60,7 +60,42 @@ const thoughtsController = {
             )
             .catch((err) => res.status(500).json(err));
     },
+        // add a reaction 
+    addReaction(req, res) {
+        console.log('You are adding a reaction');
+        Thoughts.findOneAndUpdate(
+          { _id: req.params.thoughtsId },
+          { $addToSet: { reactionBody: req.body } },
+          { runValidators: true, new: true }
+        )
+          .then((reactions) =>
+            !reactions
+              ? res
+                  .status(404)
+                  .json({ message: 'No thought found with that ID' })
+              : res.json(reactions)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
 
+
+    // remove reaction
+        removeReaction(req, res) {
+        console.log('You are removing a reaction');
+        User.findOneAndUpdate(
+          { _id: req.params.thoughtsId },
+          { $delete: { reactions: req.params.objectId } },
+          { runValidators: true, new: true }
+        )
+          .then((reactions) =>
+            !reactions
+              ? res
+                  .status(404)
+                  .json({ message: 'No reaction with that ID' })
+              : res.json(reactions)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
 
 };
 
