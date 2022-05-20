@@ -14,7 +14,10 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            //match: look up regex [must be an email address]
+            //match: look up regex [must be an email address], input as string
+            match: [
+                /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+            ]
         },
         thoughts: [
             {

@@ -11,7 +11,7 @@ const thoughtsController = {
     getOneThought(req, res) {
         //   Hook up thought Id with route 
         Thoughts.findOne({ _id: req.params.thoughtId })
-            //   .select('-__v')
+            .select('-__v')
             .then((thoughts) =>
                 !thoughts
                     ? res.status(404).json({ message: 'No thought with that ID' })
@@ -42,9 +42,7 @@ const thoughtsController = {
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'No thought with that ID' })
-        // do we need to delete reference in User ? 
-            )
-            .then(() => res.json({ message: 'Thought deleted!' }))
+                    : res.json({ message: 'Thought deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
     // Update a thought
