@@ -1,5 +1,5 @@
 // Require what's needed 
-const { Schema, Types } = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
 
 // Create new schema 
 const reactionSchema = new Schema(
@@ -20,11 +20,11 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: timeStamp => dateFormat (timeStamp),
+            // get: timeStamp => dateFormat (timeStamp),
         },
-        toJSON: {
-            virtuals: true,
-        },
+        // toJSON: {
+        //     getters: true,
+        // },
         id: false,
     }
 );
