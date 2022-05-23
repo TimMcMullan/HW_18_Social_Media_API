@@ -6,7 +6,7 @@ const userController = {
 
   // Get all users 
   getAllUser(req, res) {
-    User.fine()
+    User.find()
       .select('-__v')
       .then((dbUserData) => {
         res.json(dbUserData);

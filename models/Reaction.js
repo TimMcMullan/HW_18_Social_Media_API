@@ -22,9 +22,9 @@ const reactionSchema = new Schema(
             default: Date.now,
             // get: timeStamp => dateFormat (timeStamp),
         },
-        // toJSON: {
-        //     getters: true,
-        // },
+        toJSON: {
+            // getters: true,
+        },
         id: false,
     }
 );
