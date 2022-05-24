@@ -1,5 +1,5 @@
 // Require what's needed 
-const { Schema, Types, model } = require("mongoose");
+const { Schema, Types } = require("mongoose");
 
 // Create new schema 
 const reactionSchema = new Schema(
@@ -7,6 +7,7 @@ const reactionSchema = new Schema(
         reactionId: {
             type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId(),
+            // required: true,
         },
         reactionBody: {
             type: String,
@@ -20,7 +21,7 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // get: timeStamp => dateFormat (timeStamp),
+            get: timeStamp => dateFormat (timeStamp),
         },
         toJSON: {
             // getters: true,
@@ -29,5 +30,5 @@ const reactionSchema = new Schema(
     }
 );
 
-const Reaction = model('Reaction', reactionSchema);
-module.exports = Reaction;
+
+module.exports = reactionSchema;

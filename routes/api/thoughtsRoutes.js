@@ -8,14 +8,14 @@ const {
     updateThoughts
 } = require("../../controllers/thoughtsController")
 
-// api/users route 
+// api/thoughts route 
 router.route("/").get(getThoughts).post(createThoughts);
 
-// api/users/thoughtsId route 
+// api/thoughts/thoughtsId route 
 router.route("/:thoughtsId").get(getOneThought).put(updateThoughts).delete(deleteThoughts);
 
-// api/users/:thoughtsId/reaction/:reactionId route 
-// router.route("/:thoughtsId/reaction/").post(addReaction)
+// api/thoughts/:thoughtsId/reaction/ route 
+// router.route("/:thoughtsId/reaction").post(addReaction);
 
 // router.route("/:thoughtsId/reaction/:reactionId").delete(removeReaction);
 

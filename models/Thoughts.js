@@ -2,7 +2,7 @@
 const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 // Create new schema 
-const reachtionSchema = require("./Reaction");
+
 const thoughtsSchema = new Schema(
     {
         thoughtsText: {
@@ -15,17 +15,24 @@ const thoughtsSchema = new Schema(
             type: Date,
             default: Date.now,
             // get: timeStamp => dateFormat (timeStamp),
+            // new Date("<YYYY-mm-ddTHH:MM:ss>")
+            // dateToString: {
+            //     format: "%H:%M:%S:%L:%z",
+            //     date: "$date",
+            //     timezone: "America/New_York"
+            // }
             },
         username: {
             type: String, 
             required: true,
         },
         reactions: [
-            'Reaction'
+            // reactionSchema,
 ]
     },
         {    
         toJSON: {
+            getters: true,
             virtuals: true,
         },
         id: false,

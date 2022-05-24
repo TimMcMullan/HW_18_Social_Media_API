@@ -1,4 +1,4 @@
-const { create } = require("domain");
+// const { create } = require("domain");
 const { User, Thoughts } = require("../models");
 
 const userController = {
@@ -27,13 +27,13 @@ const userController = {
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
-      .populate('friends')
-      .populate('thoughts')
-    then((dbUserData) => {
-      if (!dbUserData) {
+      // .populate('friends')
+      // .populate('thoughts')
+    .then((users) => {
+      if (!users) {
         return res.status(404).json({ message: 'User ID does not exist' });
       }
-      res.json(dbUserData);
+      res.json(users);
     })
       .catch((err) => {
         console.log(err);
@@ -78,9 +78,9 @@ const userController = {
     console.log('You are adding a friend');
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.params.objectId } },
+      { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
-    )
+    )      
       .then((user) =>
         !user
           ? res
@@ -97,7 +97,7 @@ const userController = {
     console.log('You are removing a friend');
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $delete: { friends: req.params.objectId } },
+      { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
