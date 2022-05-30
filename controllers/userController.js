@@ -1,4 +1,6 @@
 // const { create } = require("domain");
+const req = require("express/lib/request");
+const res = require("express/lib/response");
 const { User, Thoughts } = require("../models");
 
 const userController = {
@@ -61,16 +63,26 @@ const userController = {
   deleteUser(req, res) {
     User.findOneAndDelete(
       { _id: req.params.userId },
-      { runValidators: true, new: true }
     )
       .then((user) =>
         !user
           ? res
             .status(404)
             .json({ message: 'No user found with that ID' })
-          : res.json({ message: "User deleted" })
-      )
-      .catch((err) => res.status(500).json(err));
+            : res.json({ message: "User deleted"})
+          )
+      // .then((thought) =>
+      // !thought
+      // ? res
+      // .status(404)
+      // .json({ message: "No thoughts to delete" })
+      // : Thoughts.findAllAndDelete(
+      //   { thoughts: req.param.userId },
+      //   { $delete: { thoughts: req.params.userId }},
+      //   { new: true }
+      // )
+      .catch((err) => { res.status(500).json(err);
+      });
   },
 
   // Add friend .addFriend

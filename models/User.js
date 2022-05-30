@@ -8,13 +8,13 @@ const userSchema = new Schema(
             type: String, 
             required: true,
             unique: true,
-            trim: true,
+            trim: true
         },
         email: {
             type: String,
             required: true,
             unique: true,
-            //match: look up regex [must be an email address], input as string
+            //match: must be valid email address
             match: [
                 /.+@.+\..+/,
                 'Must be a valid email address!'
@@ -45,9 +45,9 @@ userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 });
 
-userSchema.virtual('thoughtsCount').get(function () {
-    return this.thoughts.length;
-});
+// userSchema.virtual('thoughtsCount').get(function () {
+//     return this.thoughts.length;
+// });
 
 const User = model('User', userSchema);
 module.exports = User;
